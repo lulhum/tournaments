@@ -1,0 +1,11 @@
+{
+  "entrypoints": {
+    "index": {
+      "js": [
+        "http://0.0.0.0:14094/build/runtime.js",
+        "http://0.0.0.0:14094/build/vendors~index.js",
+        "http://0.0.0.0:14094/build/index.js"
+      ]
+    }
+  }
+}

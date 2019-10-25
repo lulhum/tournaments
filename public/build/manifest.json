@@ -1,0 +1,5 @@
+{
+  "build/index.js": "http://0.0.0.0:14094/build/index.js",
+  "build/runtime.js": "http://0.0.0.0:14094/build/runtime.js",
+  "build/vendors~index.js": "http://0.0.0.0:14094/build/vendors~index.js"
+}

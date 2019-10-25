@@ -1,0 +1,54 @@
+version: '3'
+services:
+
+  encore:
+    image: node:alpine
+    working_dir: /app
+    command: yarn encore dev-server --hot --port=14094 --host=0.0.0.0
+    ports:
+      - "14094:14094"
+    volumes:
+      - "./:/app"
+
+  app:
+    build: ./
+    command: php bin/console server:run 0.0.0.0:8000
+    environment:
+      DB_PASSWORD: ano458o7abtnmak54
+      APP_DEBUG: 1
+      VAR_DUMPER_SERVER: dump:8000
+    ports:
+      - "14090:8000"
+    volumes:
+      - "./:/app"
+      - "composer:/root/composer"
+    depends_on:
+      - encore
+      - db
+
+  dump:
+    build: ./
+    command: php bin/console server:dump
+    environment:
+      VAR_DUMPER_SERVER: 0.0.0.0:8000
+    expose:
+      - 8000
+    volumes:
+      - "./:/app"
+      - "composer:/root/composer"
+  
+  db:
+    image: postgres:11
+    volumes:
+      - "db_data:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: ano458o7abtnmak54
+      POSTGRES_USER: lulhum
+      POSTGRES_DATABASE: lulhum
+      
+volumes:
+  composer: null
+  db_data: null
+  
